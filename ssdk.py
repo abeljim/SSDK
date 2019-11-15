@@ -5,5 +5,8 @@ def sh(script):
     os.system("bash -c '%s'" % script)
 
 def take_photo(x):
-	sh("gphoto2 --capture-image-and-download")
-	return 5
+        if(x == 1):
+            sh("gphoto2 --capture-image-and-download")
+        else if(x == 2):
+            sh("sh ./capture2.sh")
+	return 0
