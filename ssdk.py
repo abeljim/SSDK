@@ -6,4 +6,4 @@ def sh(script):
 
 def take_photo(x):
 	sh("gphoto2 --capture-image-and-download")
-	return 0
+	return 5
