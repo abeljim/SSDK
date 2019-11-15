@@ -1,5 +1,5 @@
 #!/bin/bash
-WD = "/home/sierra/Pictures/$1"
+WD="/home/sierra/Pictures/$1"
 epoch=$(date +%s%N)
 counter=1
 while [ $counter -le 10 ]; do
