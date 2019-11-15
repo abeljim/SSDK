@@ -1,6 +1,5 @@
 #!/bin/bash
 WD = "/home/sierra/Pictures/${1}"
-mkdir $WD
 epoch=$(date +%s%N)
 counter=1
 while [ $counter -le 10 ]; do
