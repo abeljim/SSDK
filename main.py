@@ -34,21 +34,9 @@ def signal():
 def sh(script):
     os.system("bash -c '%s'" % script)
 
-'''
-def burst(A,st)
-    sh("gphoto2 --capture-image-and-download --interval=1 --frames=5 --force-overwrite")
-    sh("mv *.jpg ~/Pictures/tmp")
-    i = st
-    for filename in os.listdir("~/Pictures/tmp")
-        dst = "capt" + str(A) + str(i)+ "jpg"
-        src = '~/Pictures/tmp' + filename
-        dst = '~/Pictures/tmp' + dst
-        os.rename(src,dst)
-        i + = 1
-'''    
 
 # Currents to be tested
-i = [0.00005, 0.000100,0.000250]
+i = [0.00005, 0.000100, 0.000250]
 
 # image capture loop
 for j in range(3): # number of replicates
@@ -57,7 +45,6 @@ for j in range(3): # number of replicates
         keithley.source_i(sourcemeter, I=0.001)
         sourcemeter.write(':OUTP ON')
         countdown(60)
-        signal()
         sourcemeter.write('OUTP OFF')
         countdown(120)
         
@@ -66,28 +53,19 @@ for j in range(3): # number of replicates
         keithley.source_i(sourcemeter,I = i[k]) # set current
         sourcemeter.write('OUTP ON') # run current
         countdown(300) # 5 minutes
-        signal() # signals SS is reached
-        
+                
         # Capture SS Images
-        number = ssdk_pb2.Number(value=1)
+        fname = str(int(i[k]*(1000000))) + '_S' + str(j)
+        number = ssdk_pb2.Number(value=1,name=fname)
         response = stub.TakePhoto(number)
-        sh("gphoto2 --capture-image-and-download --interval=2 --frames=150 --force-overwrite")
-        sh("mv *.jpg ~/Pictures/" + str(i[k]) + "_S" + str(j))
-        signal() # signals SS images are captured
         
         ## Capture Decay Images
-        """
+        fname = str(int(i[k]*(1000000))) + '_D' + str(j)
+        number = ssdk_pb2.Number(value=1,name=fname)
         sourcemeter.write('OUTP OFF')
-        sh("gphoto2 --capture-image-and-download --interval=1 --frames=120 --force-overwrite")
-        sh("mv *.jpg ~/Pictures/" + str(i[k]) + "_S" + str(j))
-        sh("gphoto2 --capture-image-and-download --interval=1 --frames=120 --force-overwrite")
-        sh("mv *.jpg ~/Pictures/tmp")
-        burst(0,121)
-        sh("mv ~/Pictures/tmp/*.jpg ~/Pictures/" + str(i[k]) + "_S" + str(j))
-        """
-
-        sourcemeter.write('OUTP OFF')
-        sh("../scripts/capture2.sh " + "~/Pictures/" + str(i[k]) + "_S" + str(j)) 
+        response = stub.TakePhoto(number)
+        print('done with current: ' + str(int(i[k]*(1000000))) + 'uA')
+        
 
 
 
