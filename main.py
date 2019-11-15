@@ -3,8 +3,12 @@ import visa
 import keithley
 import time
 import numpy as np
+import grpc
+import ssdk_pb2
+import ssdk_pb2_grpc
 
-
+channel = grpc.insecure_channel('127.0.1.1:50051') 
+stub = ssdk_pb2_grpc.CameraStub(channel)
 rm = visa.ResourceManager()
 rm.list_resources()
 sourcemeter = rm.open_resource('GPIB0::12::INSTR')
@@ -65,6 +69,8 @@ for j in range(3): # number of replicates
         signal() # signals SS is reached
         
         # Capture SS Images
+        number = ssdk_pb2.Number(value=1)
+        response = stub.TakePhoto(number)
         sh("gphoto2 --capture-image-and-download --interval=2 --frames=150 --force-overwrite")
         sh("mv *.jpg ~/Pictures/" + str(i[k]) + "_S" + str(j))
         signal() # signals SS images are captured
