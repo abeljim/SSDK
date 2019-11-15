@@ -10,7 +10,7 @@ import ssdk
 class CameraServicer(ssdk_pb2_grpc.CameraServicer):
     def TakePhoto(self, request, context):
         response = ssdk_pb2.Number()
-        response.value = ssdk.take_photo(request.value)
+        response.value = ssdk.take_photo(request.value,request.name)
         return response
 
 server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))

@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\nssdk.proto\"\x17\n\x06Number\x12\r\n\x05value\x18\x01 \x01(\x02\x32)\n\x06\x43\x61mera\x12\x1f\n\tTakePhoto\x12\x07.Number\x1a\x07.Number\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\nssdk.proto\"%\n\x06Number\x12\r\n\x05value\x18\x01 \x01(\x02\x12\x0c\n\x04name\x18\x02 \x01(\t2)\n\x06\x43\x61mera\x12\x1f\n\tTakePhoto\x12\x07.Number\x1a\x07.Number\"\x00\x62\x06proto3')
 )
 
 
@@ -40,6 +40,13 @@ _NUMBER = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='name', full_name='Number.name', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -53,7 +60,7 @@ _NUMBER = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=14,
-  serialized_end=37,
+  serialized_end=51,
 )
 
 DESCRIPTOR.message_types_by_name['Number'] = _NUMBER
@@ -74,8 +81,8 @@ _CAMERA = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=39,
-  serialized_end=80,
+  serialized_start=53,
+  serialized_end=94,
   methods=[
   _descriptor.MethodDescriptor(
     name='TakePhoto',

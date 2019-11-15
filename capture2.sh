@@ -1,5 +1,6 @@
 #!/bin/bash
 WD= $1
+echo  "$1"
 epoch=$(date +%s%N)
 counter=1
 while [ $counter -le 10 ]; do
