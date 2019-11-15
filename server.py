@@ -2,21 +2,21 @@ import grpc
 from concurrent import futures
 import time
 
-import calculator_pb2
-import calculator_pb2_grpc
+import ssdk_pb2
+import ssdk_pb2_grpc
 
-import calculator
+import ssdk
 
-class CalculatorServicer(calculator_pb2_grpc.CalculatorServicer):
-    def SquareRoot(self, request, context):
-        response = calculator_pb2.Number()
-        response.value = calculator.square_root(request.value)
+class CameraServicer(ssdk_pb2_grpc.CameraServicer):
+    def TakePhoto(self, request, context):
+        response = ssdk_pb2.Number()
+        response.value = ssdk.take_photo(request.value)
         return response
 
 server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
 
-calculator_pb2_grpc.add_CalculatorServicer_to_server(
-        CalculatorServicer(), server)
+ssdk_pb2_grpc.add_CameraServicer_to_server(
+        CameraServicer(), server)
 
 print("Starting server. Listening on port 50051.")
 server.add_insecure_port('[::]:50051')
