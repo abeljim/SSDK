@@ -1,5 +1,9 @@
-import math 
+import math
+import os
+
+def sh(script):
+    os.system("bash -c '%s'" % script)
 
 def take_photo(x):
-	y = math.sqrt(x)
-	return y
+	sh("gphoto2 --capture-image-and-download")
+	return 0
