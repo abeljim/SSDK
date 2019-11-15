@@ -9,5 +9,3 @@ def take_photo(x):
             sh("gphoto2 --capture-image-and-download")
         elif(x == 2):
             sh("sh ./capture2.sh")
-            
-	return 0
