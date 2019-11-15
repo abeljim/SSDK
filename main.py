@@ -61,7 +61,7 @@ for j in range(3): # number of replicates
         
         ## Capture Decay Images
         fname = str(int(i[k]*(1000000))) + '_D' + str(j)
-        number = ssdk_pb2.Number(value=1,name=fname)
+        number = ssdk_pb2.Number(value=2,name=fname)
         sourcemeter.write('OUTP OFF')
         response = stub.TakePhoto(number)
         print('done with current: ' + str(int(i[k]*(1000000))) + 'uA')
